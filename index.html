@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#04101a" />
+    <meta name="description" content="Chiller — a quiet drift across a frozen sea. An ambient tilt-and-touch game for phone and tablet." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Chiller — a quiet drift</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="scene" aria-label="Chiller game world"></canvas>
+
+    <div id="ui">
+      <header id="hud" class="hidden" aria-live="polite">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">CHILLER</span>
+        </div>
+        <div class="hud-actions">
+          <div class="mote-count" id="mote-count" aria-label="Light gathered">
+            <span class="mote-glyph" aria-hidden="true">✦</span>
+            <span id="mote-value">0</span>
+          </div>
+          <button id="tilt-button" class="icon-button" type="button" aria-label="Toggle tilt steering" aria-pressed="false" title="Tilt steering">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M6.3 6.3l2.1 2.1m7.2 7.2 2.1 2.1m0-11.4-2.1 2.1m-7.2 7.2-2.1 2.1"/><circle cx="12" cy="12" r="4.2"/></svg>
+          </button>
+          <button id="sound-button" class="icon-button" type="button" aria-label="Toggle sound" aria-pressed="true" title="Sound">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.2L12 18V6L7.2 9.5H4Z"/><path class="wave" d="M15.2 8.4a5 5 0 0 1 0 7.2M17.8 5.8a8.6 8.6 0 0 1 0 12.4"/></svg>
+          </button>
+          <button id="pause-button" class="icon-button" type="button" aria-label="Pause" title="Pause">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.5v13M15.5 5.5v13"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div id="hint" class="hidden" aria-hidden="true">
+        <span class="hint-hand" aria-hidden="true">✥</span>
+        <span id="hint-text">Drag anywhere to steer</span>
+      </div>
+
+      <div id="joystick" class="hidden" aria-hidden="true">
+        <div id="joystick-knob"></div>
+      </div>
+
+      <section id="start-screen" class="overlay">
+        <div class="panel">
+          <p class="eyebrow">A quiet drift</p>
+          <h1>CHILLER</h1>
+          <p class="lede">Glide across a frozen sea. Gather drifting light.<br />No timer. No falling. Just flow.</p>
+          <button id="start-button" class="primary" type="button" aria-label="Start">Start</button>
+
+          <div class="settings">
+            <label class="switch-row" for="start-tilt">
+              <span class="switch-copy">
+                <span class="switch-title">Tilt steering</span>
+                <span class="switch-sub">Optional motion control</span>
+              </span>
+              <input id="start-tilt" class="switch-input" type="checkbox" />
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+            <label class="switch-row" for="start-sound">
+              <span class="switch-copy">
+                <span class="switch-title">Ambient sound</span>
+                <span class="switch-sub">Headphones recommended</span>
+              </span>
+              <input id="start-sound" class="switch-input" type="checkbox" checked />
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <p class="micro">Touch always works. Tilt asks for motion access on iOS.</p>
+        </div>
+        <p class="corner-note">Phone · Tablet · Desktop</p>
+      </section>
+
+      <section id="pause-screen" class="overlay hidden" aria-hidden="true">
+        <div class="panel panel-compact">
+          <p class="eyebrow">Take a breath</p>
+          <h2>Paused</h2>
+          <button id="resume-button" class="primary" type="button">Resume</button>
+          <div class="settings">
+            <label class="switch-row" for="pause-tilt">
+              <span class="switch-copy">
+                <span class="switch-title">Tilt steering</span>
+                <span class="switch-sub">Optional motion control</span>
+              </span>
+              <input id="pause-tilt" class="switch-input" type="checkbox" />
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+            <label class="switch-row" for="pause-sound">
+              <span class="switch-copy">
+                <span class="switch-title">Ambient sound</span>
+                <span class="switch-sub">Headphones recommended</span>
+              </span>
+              <input id="pause-sound" class="switch-input" type="checkbox" checked />
+              <span class="switch" aria-hidden="true"></span>
+            </label>
+          </div>
+          <button id="restart-button" class="ghost" type="button">Restart drift</button>
+        </div>
+      </section>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
